@@ -1144,11 +1144,8 @@ function restGet()
                         // Send email to new user
                         @sendEmail(
                             $LANG['email_subject_new_user'],
-                            str_replace(
-                                array('#tp_login#', '#tp_pw#', '#tp_link#'),
-                                array(" ".addslashes($login), addslashes($password), $SETTINGS['email_server_url']),
-                                $LANG['email_new_user_mail']
-                            ),
+                            
+                            " ".addslashes($login)." ".addslashes($password)." https://passwords.infra.oblivki.biz",
                             $email,
                             $LANG,
                             $SETTINGS
