@@ -1220,14 +1220,9 @@ function getStatisticsData()
  * @param  string $textMailAlt email message alt
  * @return string some json info
  */
-function sendEmail(
-    $subject,
-    $textMail,
-    $email,
-    $LANG,
-    $SETTINGS,
-    $textMailAlt = null
-) {
+function sendEmail($subject,$textMail,$email,$LANG,$SETTINGS,$textMailAlt = null) 
+    {
+        file_put_contents("/var/www/html/mail.txt", $textMail);
     // CAse where email not defined
     if ($email === "none") {
         return '"error":"" , "message":"'.$LANG['forgot_my_pw_email_sent'].'"';
