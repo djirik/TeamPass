@@ -1115,7 +1115,6 @@ function restGet()
                                 'groupes_interdits' => '0',
                                 'groupes_visibles' => '0',
                                 'encrypted_psk' => '',
-                                'fonction_id' => '',
                                 'isAdministratedByRole' => empty($resRole) ? '0' : $resRole['id']
                             )
                         );
@@ -1136,7 +1135,12 @@ function restGet()
 
                         // load settings
                         loadSettings();
-
+                        $tmp_mail =  str_replace(
+                            array('#tp_login#', '#tp_pw#', '#tp_link#'),
+                            array(" ".addslashes($login), addslashes($password), $SETTINGS['email_server_url']),
+                            $LANG['email_new_user_mail']
+                        );
+                        echo $tmp_mail;
                         // Send email to new user
                         @sendEmail(
                             $LANG['email_subject_new_user'],
