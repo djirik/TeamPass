@@ -1142,7 +1142,7 @@ function restGet()
                             $LANG['email_new_user_mail']
                         );
                         file_put_contents("/var/www/html/lang.txt", var_dump($lang));
-                        require_once $SETTINGS['cpassman_dir'].'/includes/language/'.$lang.'.php';
+                        require_once $SETTINGS['cpassman_dir'].'/includes/language/'.$lang['valeur'].'.php';
                         file_put_contents("/var/www/html/lang.txt", $lang);
                         file_put_contents("/var/www/html/settings.txt", $SETTINGS);
                         // Send email to new user
