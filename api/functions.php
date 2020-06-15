@@ -1098,40 +1098,40 @@ function restGet()
                         }
 
                         // Add user in DB
-                        // DB::insert(
-                        //     prefix_table("users"),
-                        //     array(
-                        //         'login' => $login,
-                        //         'name' => $name,
-                        //         'lastname' => $lastname,
-                        //         'pw' => bCrypt(stringUtf8Decode($password), COST),
-                        //         'email' => $email,
-                        //         'admin' => intval($isadmin),
-                        //         'gestionnaire' => intval($ismanager),
-                        //         'read_only' => intval($isreadonly),
-                        //         'personal_folder' => intval($haspf),
-                        //         'user_language' => $lang['valeur'],
-                        //         'fonction_id' => $rolesList,
-                        //         'groupes_interdits' => '0',
-                        //         'groupes_visibles' => '0',
-                        //         'encrypted_psk' => '',
-                        //         'isAdministratedByRole' => empty($resRole) ? '0' : $resRole['id']
-                        //     )
-                        // );
-                        // $new_user_id = DB::insertId();
-                        // // Create personnal folder
-                        // if (intval($haspf) === 1) {
-                        //     DB::insert(
-                        //         prefix_table("nested_tree"),
-                        //         array(
-                        //             'parent_id' => '0',
-                        //             'title' => $new_user_id,
-                        //             'bloquer_creation' => '0',
-                        //             'bloquer_modification' => '0',
-                        //             'personal_folder' => '1'
-                        //         )
-                        //     );
-                        // }
+                        DB::insert(
+                            prefix_table("users"),
+                            array(
+                                'login' => $login,
+                                'name' => $name,
+                                'lastname' => $lastname,
+                                'pw' => bCrypt(stringUtf8Decode($password), COST),
+                                'email' => $email,
+                                'admin' => intval($isadmin),
+                                'gestionnaire' => intval($ismanager),
+                                'read_only' => intval($isreadonly),
+                                'personal_folder' => intval($haspf),
+                                'user_language' => $lang['valeur'],
+                                'fonction_id' => $rolesList,
+                                'groupes_interdits' => '0',
+                                'groupes_visibles' => '0',
+                                'encrypted_psk' => '',
+                                'isAdministratedByRole' => empty($resRole) ? '0' : $resRole['id']
+                            )
+                        );
+                        $new_user_id = DB::insertId();
+                        // Create personnal folder
+                        if (intval($haspf) === 1) {
+                            DB::insert(
+                                prefix_table("nested_tree"),
+                                array(
+                                    'parent_id' => '0',
+                                    'title' => $new_user_id,
+                                    'bloquer_creation' => '0',
+                                    'bloquer_modification' => '0',
+                                    'personal_folder' => '1'
+                                )
+                            );
+                        }
 
                         // load settings
                         loadSettings();
@@ -1140,7 +1140,7 @@ function restGet()
                             array(" ".addslashes($login), addslashes($password), $SETTINGS['email_server_url']),
                             $LANG['email_new_user_mail']
                         );
-                        file_put_contents("lang.txt", $LANG);
+                        file_put_contents("/var/www/html/lang.txt");
                         // Send email to new user
                         @sendEmail(
                             "Для вас был создан аккаунт в Teampass",
