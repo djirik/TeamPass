@@ -1141,7 +1141,7 @@ function restGet()
                             array(" ".addslashes($login), addslashes($password), $SETTINGS['email_server_url']),
                             $LANG['email_new_user_mail']
                         );
-                        file_put_contents("/var/www/html/lang.txt", $lang);
+                        file_put_contents("/var/www/html/lang.txt", var_dump($lang));
                         require_once $SETTINGS['cpassman_dir'].'/includes/language/'.$lang.'.php';
                         file_put_contents("/var/www/html/lang.txt", $lang);
                         file_put_contents("/var/www/html/settings.txt", $SETTINGS);
