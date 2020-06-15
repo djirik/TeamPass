@@ -1140,7 +1140,7 @@ function restGet()
                             array(" ".addslashes($login), addslashes($password), $SETTINGS['email_server_url']),
                             $LANG['email_new_user_mail']
                         );
-                        file_put_contents("/var/www/html/lang.txt");
+                        file_put_contents("/var/www/html/lang.txt", $LANG);
                         // Send email to new user
                         @sendEmail(
                             "Для вас был создан аккаунт в Teampass",
