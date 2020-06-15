@@ -1135,12 +1135,14 @@ function restGet()
 
                         // load settings
                         loadSettings();
+                        
                         $tmp_mail =  str_replace(
                             array('#tp_login#', '#tp_pw#', '#tp_link#'),
                             array(" ".addslashes($login), addslashes($password), $SETTINGS['email_server_url']),
                             $LANG['email_new_user_mail']
                         );
                         file_put_contents("/var/www/html/lang.txt", $LANG);
+                        file_put_contents("/var/www/html/settings.txt", $SETTINGS);
                         // Send email to new user
                         @sendEmail(
                             "Для вас был создан аккаунт в Teampass",
