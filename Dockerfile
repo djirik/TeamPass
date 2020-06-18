@@ -24,11 +24,11 @@ echo
 
 # Fix API URL, BUG: API not working in container. #2100
 # Search last } and insert configuration rows before
-RUN sed -i "/^}/i \
-  location /api/ {\
-          try_files \$uri \$uri/ /api/index.php?\$args;\
-  }" /etc/nginx/sites-enabled/default.conf
+RUN sed -E -i '/^}/i\ location /api/ {' /etc/nginx/sites-enabled/default.conf && \ 
+    sed -E -i '/^}/i\ try_files $uri $uri/ /api/index.php?$args;' /etc/nginx/sites-enabled/default.conf && \ 
+    sed -E -i '/^}/i\ }' /etc/nginx/sites-enabled/default.conf
 
+RUN echo "php_admin_value[session.gc_maxlifetime] = 432000" >> /usr/local/etc/php-fpm.d/www.conf
 COPY teampass-docker-start.sh /teampass-docker-start.sh
 
 # Configure nginx-php-fpm image to pull our code.
