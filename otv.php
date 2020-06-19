@@ -140,7 +140,7 @@ DB::$host = $server;
                 "<tr><td>Password:</td><td>".htmlspecialchars($pw['string'])."</td></tr>".
                 "<tr><td>Description:</td><td>".$description."</td></tr>".
                 "<tr><td>login:</td><td>".$login."</td></tr>".
-                "<tr><td>URL:</td><td>".$url."</td></tr>".
+                "<tr><td>URL:</td><td><a href='".$url."'>".$url."</a></td></tr>".
                 "</table></div>".
                 "<div style='margin-top:30px;'>Copy carefully the data you need. This page is only visible once.</div>".
                 "</div>";
